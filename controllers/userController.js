@@ -43,3 +43,22 @@ export const addUser = (req, res) => {
     );
   });
 };
+
+export const deleteUser = (req, res) => {
+
+  connectionPool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log("connected to database " + connection.threadId);
+
+  connection.query('UPDATE users SET active = ? WHERE ID = ?', ['removed', req.params.ID], (err, rows) => {
+    if (!err) {
+      let removedUser = encodeURIComponent('User successeflly removed.');
+      res.redirect('/?removed=' + removedUser);
+    } else {
+      console.log(err);
+    }
+    console.log('The data from beer table are: \n', rows);
+  });
+  });
+
+}
