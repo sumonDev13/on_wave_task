@@ -19,10 +19,12 @@ const handlebars = exphbs.create({ extname: ".hbs" });
 app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
-connectionPool.connect((err, connection) => {
-  if (err) throw err;
-  console.log("connected to database");
-});
+// connectionPool.getConnection((err, connection) => {
+//   if (err) throw err;
+//   console.log("connected to database " + connection.threadId);
+//   // Don't forget to release the connection after use
+ 
+// });
 
 app.use('/',userRoute)
 
