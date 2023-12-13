@@ -25,7 +25,7 @@ app.set("view engine", ".hbs");
 //   // Don't forget to release the connection after use
  
 // });
-
+app.use('/images',express.static('public/images'))
 app.use('/',userRoute);
 app.use('/api/upload',uploadRouter);
 
