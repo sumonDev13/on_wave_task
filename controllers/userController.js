@@ -1,7 +1,9 @@
 import { connectionPool } from "../config/db.js";
 
 export const home =(req, res) =>{
-  res.render('home');
+  res.render('home',{
+    style:'style.css'
+  });
 }
 
 export const viewUser = (req, res) => {
