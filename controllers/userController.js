@@ -1,5 +1,9 @@
 import { connectionPool } from "../config/db.js";
 
+export const home =(req, res) =>{
+  res.render('home');
+}
+
 export const viewUser = (req, res) => {
   connectionPool.getConnection((err, connection) => {
     if (err) throw err;
@@ -9,7 +13,7 @@ export const viewUser = (req, res) => {
       connection.release();
 
       if (!err) {
-        res.render("home", { rows });
+        res.render("users", { rows });
       } else {
         console.log(err);
       }
