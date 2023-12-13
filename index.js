@@ -1,10 +1,9 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import exphbs from 'express-handlebars';
-import bodyParser from 'body-parser';
-import mysql from 'mysql';
+import express from "express";
+import dotenv from "dotenv";
+import exphbs from "express-handlebars";
+import bodyParser from "body-parser";
 
-
+import { connectionPool } from "./config/db.js";
 
 dotenv.config();
 const app = express();
@@ -15,28 +14,19 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
-const handlebars = exphbs.create({ extname: '.hbs',});
-app.engine('.hbs', handlebars.engine);
-app.set('view engine', '.hbs');
-
-
-const connectionPool = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-})
+const handlebars = exphbs.create({ extname: ".hbs" });
+app.engine(".hbs", handlebars.engine);
+app.set("view engine", ".hbs");
 
 connectionPool.connect((err, connection) => {
-    if (err) throw err;
-    console.log('connected as ID' + connection.theadId);
-})
+  if (err) throw err;
+  console.log("connected to database");
+});
 
-app.get('/', (req, res) =>{
-    res.render('home');
-})
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
-app.listen(port,()=>{
-    console.log(`Server listening on ${port}`);
-})
-
+app.listen(port, () => {
+  console.log(`Server listening on ${port}`);
+});
