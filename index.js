@@ -4,6 +4,7 @@ import exphbs from "express-handlebars";
 import bodyParser from "body-parser";
 
 import { connectionPool } from "./config/db.js";
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
 const app = express();
@@ -23,9 +24,8 @@ connectionPool.connect((err, connection) => {
   console.log("connected to database");
 });
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.use('/',userRoute)
+
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
