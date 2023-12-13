@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import exphbs from "express-handlebars";
 import bodyParser from "body-parser";
 
-import { connectionPool } from "./config/db.js";
+import uploadRouter from "./controllers/uploadController.js";
 import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
@@ -26,7 +26,8 @@ app.set("view engine", ".hbs");
  
 // });
 
-app.use('/',userRoute)
+app.use('/',userRoute);
+app.use('/api/upload',uploadRouter);
 
 
 app.listen(port, () => {
