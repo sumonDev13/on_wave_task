@@ -19,6 +19,19 @@ const handlebars = exphbs.create({ extname: '.hbs',});
 app.engine('.hbs', handlebars.engine);
 app.set('view engine', '.hbs');
 
+
+const connectionPool = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+})
+
+connectionPool.connect((err, connection) => {
+    if (err) throw err;
+    console.log('connected as ID' + connection.theadId);
+})
+
 app.get('/', (req, res) =>{
     res.render('home');
 })
