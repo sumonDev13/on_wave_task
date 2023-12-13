@@ -4,7 +4,6 @@ export const viewUser = (req, res) => {
   connectionPool.getConnection((err, connection) => {
     if (err) throw err;
     console.log("connected to database " + connection.threadId);
-    // Don't forget to release the connection after use
 
     connection.query("SELECT * FROM users", (err, rows) => {
       connection.release();
@@ -16,5 +15,31 @@ export const viewUser = (req, res) => {
       }
       console.log(`The data from user table: \n`, rows);
     });
+  });
+};
+
+export const form = (req, res) => {
+  res.render("add-user");
+};
+
+export const addUser = (req, res) => {
+  const { email, password, type } = req.body;
+
+  connectionPool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log("connected to database " + connection.threadId);
+    // User the connection
+    connection.query(
+      "INSERT INTO users SET  email = ?,password = ?,type = ?",
+      [email, password, type],
+      (err, rows) => {
+        if (!err) {
+          res.render("add-user", { alert: "User added successfully." });
+        } else {
+          console.log(err);
+        }
+        console.log("The data from user table: \n", rows);
+      }
+    );
   });
 };
