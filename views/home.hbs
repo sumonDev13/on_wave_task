@@ -16,6 +16,10 @@
     <div class="container">
         <!-- Add a container to display the responses -->
         <div id="responseContainer"></div>
+
+        <!-- Button and input field for image upload -->
+        <input type="file" id="imageInput" style="display: none;">
+        <button id="uploadButton">Upload Image</button>
     </div>
 
     <!-- Include jQuery -->
@@ -45,6 +49,33 @@
 
             // Start calling the API and displaying responses
             callAPIAndShowResponse(0);
+
+            // Function to handle image upload
+            $('#uploadButton').on('click', function () {
+                $('#imageInput').click();
+            });
+
+            $('#imageInput').on('change', function () {
+                var formData = new FormData();
+                formData.append('image', $('#imageInput')[0].files[0]);
+
+                // Make the API call to upload the image
+                $.ajax({
+                    url: 'http://localhost:5000/api/upload', // Replace with your upload-image API endpoint
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log('Image uploaded:', response);
+                        // Handle successful image upload response here
+                    },
+                    error: function (error) {
+                        console.error('Error uploading image:', error);
+                        // Handle error during image upload here
+                    }
+                });
+            });
         });
     </script>
 </body>
