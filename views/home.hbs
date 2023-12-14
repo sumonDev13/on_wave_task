@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../public/css/style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Rubik+Bubbles&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/style.css">
 </head>
+
 <body>
-    <div class="container" >
-        <h4 class="heading"id="fact"></h4>
+    <div class="container">
+        <!-- Add a container to display the responses -->
+        <div id="responseContainer"></div>
     </div>
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: 'http://numbersapi.com/1/30/date?json',
-                method: 'GET',
-                success: function(response) {
-                    console.log(response); // Do something with the response
-                    // Update the content of the element with ID 'fact'
-                    $('#fact').text(response.text);
-                },
-                error: function(error) {
-                    console.error('Error fetching data:', error);
-                }
-            });
+        $(document).ready(function () {
+            var responsesToShow = 5; // Number of responses to display
+            var responseContainer = $('#responseContainer');
+
+            function callAPIAndShowResponse(index) {
+                if (index >= responsesToShow) return;
+
+                $.ajax({
+                    url: 'http://numbersapi.com/1/30/date?json',
+                    method: 'GET',
+                    success: function (response) {
+                        console.log(response); // Do something with the response
+                        var newResponse = $('<p class="heading fade-in">' + response.text + '</p>');
+                        responseContainer.append(newResponse);
+                        callAPIAndShowResponse(index + 1); // Call next API
+                    },
+                    error: function (error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            }
+
+            // Start calling the API and displaying responses
+            callAPIAndShowResponse(0);
         });
     </script>
 </body>
+
 </html>
