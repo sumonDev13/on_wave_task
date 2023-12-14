@@ -4,6 +4,7 @@ import exphbs from "express-handlebars";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { upload } from "./uploader/uploader.js";
+import { connectionPool } from "./config/db.js";
 
 import uploadRouter from "./controllers/uploadController.js";
 import userRoute from "./routes/userRoute.js";
@@ -17,6 +18,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(express.static("public"));
+
+connectionPool.getConnection((err, connection) => {
+  if (err) throw err;
+  console.log("connected to database " + connection.threadId);
+});
 
 const handlebars = exphbs.create({ extname: ".hbs" });
 app.engine(".hbs", handlebars.engine);

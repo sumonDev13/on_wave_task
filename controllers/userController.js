@@ -8,9 +8,7 @@ export const home = (req, res) => {
 
 export const viewUser = (req, res) => {
   connectionPool.getConnection((err, connection) => {
-    if (err) throw err;
-    console.log("connected to database " + connection.threadId);
-
+  
     connection.query("SELECT * FROM users", (err, rows) => {
       connection.release();
 
@@ -32,8 +30,6 @@ export const addUser = (req, res) => {
   const { email, password, type } = req.body;
 
   connectionPool.getConnection((err, connection) => {
-    if (err) throw err;
-    console.log("connected to database " + connection.threadId);
     
     connection.query(
       "INSERT INTO users SET  email = ?,password = ?,type = ?",
