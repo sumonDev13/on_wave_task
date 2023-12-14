@@ -20,6 +20,8 @@
         <!-- Button and input field for image upload -->
         <input type="file" id="imageInput" style="display: none;">
         <button id="uploadButton">Upload Image</button>
+        {{alert}}
+
     </div>
 
     <!-- Include jQuery -->
@@ -69,6 +71,7 @@
                     success: function (response) {
                         console.log('Image uploaded:', response);
                         // Handle successful image upload response here
+                        alert('Image uploaded successfully!');
                     },
                     error: function (error) {
                         console.error('Error uploading image:', error);
