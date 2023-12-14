@@ -7,6 +7,6 @@ userRoute.get('/',home);
 userRoute.get("/users", viewUser);
 userRoute.post("/addUser", addUser);
 userRoute.get("/addUser", form);
-userRoute.get("/:ID", deleteUser);
+userRoute.get("/:id", deleteUser);
 
   export default userRoute;

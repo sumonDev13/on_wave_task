@@ -22,35 +22,25 @@ const handlebars = exphbs.create({ extname: ".hbs" });
 app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
-// connectionPool.getConnection((err, connection) => {
-//   if (err) throw err;
-//   console.log("connected to database " + connection.threadId);
-//   // Don't forget to release the connection after use
- 
-// });
-app.use('/images',express.static('public/images'))
-app.use('/',userRoute);
-app.use('/api/upload',uploadRouter);
+app.use("/images", express.static("public/images"));
+app.use("/", userRoute);
+app.use("/api/upload", uploadRouter);
 
 const logoUpload = upload.single("image");
 app.post("/test/upload", (req, res) => {
   logoUpload(req, res, (err) => {
     if (err) {
-      // console.log(err);
       if (err.code === "LIMIT_FILE_SIZE") {
         return res.status(400).send("file size exceeds maximum limit");
       }
       console.log(err.message);
       return res.status(400).send({ error: err.message });
     }
-    //when no error
-    // console.log("save the file", req.file);
-    // console.log(`here's the file path:::`, req.file.path);
+
     console.log("i am here::", req.file.path);
     return res.send("file uploaded successfully");
   });
 });
-
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);

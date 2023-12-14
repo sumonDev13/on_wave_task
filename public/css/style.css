@@ -1,4 +1,4 @@
-/* style.css */
+
 
 body {
     font-family: Arial, sans-serif;
@@ -34,7 +34,7 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Apply animation to the upload button */
+
 #uploadButton {
     animation: pulse 1.5s infinite;
     background-color:#44c767;
@@ -51,7 +51,6 @@ body {
     
 }
 
-/* Other styles for clarity */
 .container {
     text-align: center;
     margin-top: 50px;
