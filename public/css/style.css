@@ -55,3 +55,10 @@ body {
     text-align: center;
     margin-top: 50px;
 }
+
+.navbar-brand{
+    font-family: Rubik Bubbles;
+}
+.nav-link{
+    font-family: Rubik Bubbles;
+}
