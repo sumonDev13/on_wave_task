@@ -7,7 +7,26 @@
     <link rel="stylesheet" href="../public/css/style.css"> 
 </head>
 <body>
-    <h1 class="container">home page</h1>
-    
+    <h1 class="container">Home Page</h1>
+    <div class="container" id="fact"></div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'http://numbersapi.com/1/30/date?json',
+                method: 'GET',
+                success: function(response) {
+                    console.log(response); // Do something with the response
+                    // Update the content of the element with ID 'fact'
+                    $('#fact').text(response.text);
+                },
+                error: function(error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
