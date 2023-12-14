@@ -3,8 +3,9 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color:#19A7CE;
+    padding: 0; 
+    background-image: url('../images/hero.jpg');
+    background-size: 1600px 900px;
 }
 
 .fade-in {
