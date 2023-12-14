@@ -8,6 +8,13 @@ body {
     background-size: 1600px 900px;
 }
 
+@media (max-width: 768px) {
+    body {
+        background-size: contain;
+         
+    }
+}
+
 .fade-in {
     opacity: 0;
     animation: fadeInAnimation 1s ease-in forwards;
