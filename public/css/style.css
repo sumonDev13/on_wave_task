@@ -4,16 +4,47 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color:#F0E5CF;
+    background-color:#19A7CE;
 }
 
 .fade-in {
     opacity: 0;
     animation: fadeInAnimation 1s ease-in forwards;
     font-family: Rubik Bubbles;
+    color: aliceblue;
 }
 
 @keyframes fadeInAnimation {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Apply animation to the upload button */
+#uploadButton {
+    animation: pulse 1.5s infinite;
+    background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:8px 38px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+    
+}
+
+/* Other styles for clarity */
+.container {
+    text-align: center;
+    margin-top: 50px;
 }
